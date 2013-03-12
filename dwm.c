@@ -222,6 +222,7 @@ static void setfullscreen(Client *c, Bool fullscreen);
 static void setlayout(const Arg *arg);
 static void setmfact(const Arg *arg);
 static void setup(void);
+static void shiftview(const Arg *arg);
 static void showhide(Client *c);
 static void sigchld(int unused);
 static void spawn(const Arg *arg);
@@ -1652,6 +1653,20 @@ setup(void) {
 	XChangeWindowAttributes(dpy, root, CWEventMask|CWCursor, &wa);
 	XSelectInput(dpy, root, wa.event_mask);
 	grabkeys();
+}
+
+void
+shiftview(const Arg *arg) {
+	int i = arg->i % (int)LENGTH(tags);
+	if(i == 0)
+		return;
+	if(i < 0)
+		i += (int)LENGTH(tags);
+	selmon->tagset[selmon->seltags ^ 1] = ((selmon->tagset[selmon->seltags] << i) | \
+	(selmon->tagset[selmon->seltags] >> (LENGTH(tags) - i))) & TAGMASK;
+	selmon->seltags ^= 1; /* toggle sel tagset */
+	focus(NULL);
+	arrange(selmon);
 }
 
 void
