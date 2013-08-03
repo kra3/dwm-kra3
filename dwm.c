@@ -788,9 +788,9 @@ deck(Monitor *m){
     int dn;
     unsigned int i, n, h, mw,my;
     Client *c;
-    +	for(n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++);
-	if(n == 0)
-		return;
+    for(n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++);
+	    if(n == 0)
+		    return;
 
 	dn = n - m->nmaster;
 	if(dn > 0) /* override layout symbol */
