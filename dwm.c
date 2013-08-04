@@ -794,7 +794,7 @@ deck(Monitor *m){
 
 	dn = n - m->nmaster;
 	if(dn > 0) /* override layout symbol */
-		snprintf(m->ltsymbol, sizeof m->ltsymbol, "D %d", dn);
+		snprintf(m->ltsymbol, sizeof m->ltsymbol, "|%d]", dn);
 
 	if(n > m->nmaster)
 		mw = m->nmaster ? m->ww * m->mfact : 0;
