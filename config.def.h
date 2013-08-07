@@ -4,14 +4,32 @@
 #include "bstack.c"
 #include "bstackhoriz.c"
 
+/* Solarized Colors - Dark */
+#define base03 "#002b36"
+#define base02 "#073642"
+#define base01 "#586e75"
+#define base00 "#657b83"
+#define base0  "#839496"
+#define base1  "#93a1a1"
+#define base2  "#eee8d5"
+#define base3  "#fdf6e3"
+
 /* appearance */
 static const char font[]            = "-*-terminus-medium-r-*-*-12-*-*-*-*-*-*-*";
+static const char normbordercolor[] = base03;
+static const char normbgcolor[]     = base02;
+static const char normfgcolor[]     = base01;
+static const char selbordercolor[]  = base1;
+static const char selbgcolor[]      = base2;
+static const char selfgcolor[]      = base3;
+/*
 static const char normbordercolor[] = "#444444";
 static const char normbgcolor[]     = "#222222";
 static const char normfgcolor[]     = "#bbbbbb";
 static const char selbordercolor[]  = "#009944"; //"#005577";
 static const char selbgcolor[]      = "#009944"; //"#005577";
 static const char selfgcolor[]      = "#eeeeee";
+*/
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int systrayspacing = 2;   /* systray spacing */
