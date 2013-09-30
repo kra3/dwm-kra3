@@ -29,8 +29,7 @@ static const Rule rules[] = {
     { "Thunderbird",       NULL,                NULL,       1 << 3,       False,       -1 },
     { "Firefox",           NULL,                NULL,       1 << 8,       True,        -1 },
     { "Firefox",           "Navigator",         NULL,       1 << 8,       False,       -1 },
-    { "Chromium-browser",  "chromium-browser",  NULL,       1 << 2,       False,       -1 },
-    { "Sublime_text",       NULL,               NULL,       1 << 1,       False,       -1 },
+    { "Chromium-browser",  "chromium-browser",  NULL,       1 << 1,       False,       -1 },
 };
 
 /* layout(s) */
