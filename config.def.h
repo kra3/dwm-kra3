@@ -22,14 +22,16 @@ static const Bool topbar            = True;     /* False means bottom bar */
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
+/* run winprop for getting class and instance values */
 static const Rule rules[] = {
-	/* class      instance    title       tags mask     isfloating   monitor */
+	/* class               instance             title       tags mask     isfloating   monitor */
 	{ NULL,                NULL,                NULL,       0,            False,       -1 },
     { "Gimp",              NULL,                NULL,       1 << 8,       True,        -1 },
     { "Thunderbird",       NULL,                NULL,       1 << 3,       False,       -1 },
     { "Firefox",           NULL,                NULL,       1 << 8,       True,        -1 },
     { "Firefox",           "Navigator",         NULL,       1 << 8,       False,       -1 },
     { "Chromium-browser",  "chromium-browser",  NULL,       1 << 1,       False,       -1 },
+    { "Google-chrome",     "Google-chrome",     NULL,       1 << 1,       False,       -1 },
 };
 
 /* layout(s) */
@@ -61,8 +63,13 @@ static const Layout layouts[] = {
 /* commands */
 static const char *dmenucmd[] = { "dmenu_run", "-fn", font, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
 static const char *uxtermcmd[]  = { "uxterm", NULL };
-static const char *urxvtccmd[]  = { "urxvtc", NULL };
-static const char *i3lockcmd[]  = { "i3lock", NULL };
+static const char *urxvtccmd[]  = { "urxvt", NULL };
+static const char *i3lockcmd[]  = { "lock", NULL };
+static const char *volmutecmd[] = {"amixer","-q","sset","Master","toggle",NULL};
+static const char *voldowncmd[] = {"amixer","-q","sset","Master","5%-",NULL};
+static const char *volupcmd[] = {"amixer","-q","sset","Master","5%+",NULL};
+static const char *backlightupcmd[] = {"xbacklight","-inc","15",NULL};
+static const char *backlightdowncmd[] = {"xbacklight","-dec","15",NULL};
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -70,6 +77,12 @@ static Key keys[] = {
 	{ MODKEY|ControlMask,           XK_Return, spawn,          {.v = uxtermcmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = urxvtccmd } },
 	{ MODKEY|ControlMask|ShiftMask, XK_l,      spawn,          {.v = i3lockcmd } },
+    // xmodmap -pk | grep -i audio
+    { 0,                            0x1008ff11,spawn,          {.v = voldowncmd } },
+    { 0,                            0x1008ff12,spawn,          {.v = volmutecmd } },
+    { 0,                            0x1008ff13,spawn,          {.v = volupcmd } },
+    { 0,                            0x1008ff02,spawn,          {.v = backlightupcmd } },
+    { 0,                            0x1008ff03,spawn,          {.v = backlightdowncmd } },
     /* on/off the bar */
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
     /* rotate focus between windows */
@@ -111,7 +124,7 @@ static Key keys[] = {
     /* change focused monitor */
 	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
-    /*  I forgot !! Doesn't have an extra monitor now a days :( */
+    /*  move focused client into among monitors */
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
     /* change to tag */
